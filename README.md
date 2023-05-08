@@ -32,39 +32,39 @@ The output, with a default agent configuration, is:
 --------------------------
 Type Pollution Statistics:
 --------------------------
-1:      io.type.pollution.example.B
+1:      B
 Count:  6477753
 Types:
-        io.type.pollution.example.I2
-        io.type.pollution.example.I3
-        io.type.pollution.example.I1
+        I2
+        I3
+        I1
 Traces:
-        io.type.pollution.example.Main.goo(Main.java:74)
-                class: io.type.pollution.example.I3
+        Main.goo(Main.java:74)
+                class: I3
                 count: 1826427
-                class: io.type.pollution.example.I2
+                class: I2
                 count: 1430748
-        io.type.pollution.example.Main.foo(Main.java:69)
-                class: io.type.pollution.example.I1
+        Main.foo(Main.java:69)
+                class: I1
                 count: 1803371
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$4.accept(Unknown Source)
-                class: io.type.pollution.example.I2
+        Main$$Lambda$ByteBuddy$4.accept(Unknown Source)
+                class: I2
                 count: 1417207
 --------------------------
-2:      io.type.pollution.example.C
+2:      C
 Count:  4804011
 Types:
-        io.type.pollution.example.I2
-        io.type.pollution.example.I1
+        I2
+        I1
 Traces:
-        io.type.pollution.example.Main.castToI1(Main.java:85)
-                class: io.type.pollution.example.I1
+        Main.castToI1(Main.java:85)
+                class: I1
                 count: 2400934
-        io.type.pollution.example.Main.castToI2(Main.java:89)
-                class: io.type.pollution.example.I2
+        Main.castToI2(Main.java:89)
+                class: I2
                 count: 1848168
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$6.accept(Unknown Source)
-                class: io.type.pollution.example.I2
+        Main$$Lambda$ByteBuddy$6.accept(Unknown Source)
+                class: I2
                 count: 554909
 --------------------------
 ```
@@ -78,7 +78,7 @@ secondary super cache invalidations).
   [Idea IntelliJ Stack Trace Viewer](https://www.jetbrains.com/help/idea/analyzing-external-stacktraces.html) 
 
 The report is an ordered list which types are ordered by increasing `Count` ie
-`io.type.pollution.example.B` is the top type based on it and more likely the one with the highest chance
+`B` is the top type based on it and more likely the one with the highest chance
 to cause scalability issues.
 
 ### But what about OpenJDK JIT optimizations that could save any check to be performed?
@@ -115,48 +115,48 @@ And, the output will become:
 --------------------------
 Type Pollution Statistics:
 --------------------------
-1:      io.type.pollution.example.B
+1:      B
 Count:  6477753
 Types:
-        io.type.pollution.example.I2
-        io.type.pollution.example.I3
-        io.type.pollution.example.I1
+        I2
+        I3
+        I1
 Traces:
-        io.type.pollution.example.Main.goo(Main.java:74)
-                class: io.type.pollution.example.I3
+        Main.goo(Main.java:74)
+                class: I3
                 count: 1826427
-                class: io.type.pollution.example.I2
+                class: I2
                 count: 1430748
-        io.type.pollution.example.Main.foo(Main.java:69)
-                class: io.type.pollution.example.I1
+        Main.foo(Main.java:69)
+                class: I1
                 count: 1803371
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$4.accept(Unknown Source)
-                class: io.type.pollution.example.I2
+        Main$$Lambda$ByteBuddy$4.accept(Unknown Source)
+                class: I2
                 count: 1417207
 Full Traces:
         --------------------------
-        io.type.pollution.example.Main.goo(Main.java:74)
-        io.type.pollution.example.Main.lambda$main$0(Main.java:57)
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
+        Main.goo(Main.java:74)
+        Main.lambda$main$0(Main.java:57)
+        Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
         java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
         java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
         java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
         java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
         java.base/java.lang.Thread.run(Thread.java:829)
         --------------------------
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$4/0x00000008001be440.accept(Unknown Source)
-        io.type.pollution.example.Main.consumeAsI2(Main.java:81)
-        io.type.pollution.example.Main.lambda$main$0(Main.java:58)
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
+        Main$$Lambda$ByteBuddy$4/0x00000008001be440.accept(Unknown Source)
+        Main.consumeAsI2(Main.java:81)
+        Main.lambda$main$0(Main.java:58)
+        Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
         java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
         java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
         java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
         java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
         java.base/java.lang.Thread.run(Thread.java:829)
         --------------------------
-        io.type.pollution.example.Main.foo(Main.java:69)
-        io.type.pollution.example.Main.lambda$main$0(Main.java:56)
-        io.type.pollution.example.Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
+        Main.foo(Main.java:69)
+        Main.lambda$main$0(Main.java:56)
+        Main$$Lambda$ByteBuddy$1/0x00000008001bf840.run(Unknown Source)
         java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
         java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
         java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
