@@ -5,11 +5,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
+
     public interface I1 {}
+
     public interface I2 {}
+
     public interface I3 extends I1, I2 {}
+
     public static class B implements I3 {}
+
     public static class C implements I3 {}
+
     public static void main(String[] args) {
         int numThreads = Integer.parseInt(args[0]);
         int loopCount = Integer.parseInt(args[1]);
